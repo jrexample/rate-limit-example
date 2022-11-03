@@ -5,7 +5,8 @@ const rateLimit = (limit, expireTime) => async (
   res,
   next,
 ) => {
-  const key = `RATE_LIMIT_${req.route.path}`;
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const key = `RATE_LIMIT_${ip}_${req.route.path}`;
 
   const current = await redisClient.incr(key);
 
