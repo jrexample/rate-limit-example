@@ -1,6 +1,6 @@
 const redisClient = require('../redis');
 
-const rateLimit = (limit, expireTime) => async (
+const rateLimitMiddleware = (limit, expireTime) => async (
   req,
   res,
   next,
@@ -21,4 +21,4 @@ const rateLimit = (limit, expireTime) => async (
   return next();
 }
 
-module.exports = rateLimit;
+module.exports = rateLimitMiddleware;
